@@ -19,10 +19,10 @@ function Login() {
     setLoading(true)
 
     try {
-      const res = await axios.post("http://localhost:3000/api/user/login", {
-        email,
-        password,
-      })
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/user/login`,
+        { email, password }
+      )
 
       // backend returns 200 even on failure (e.g. "Invalid Credentials"),
       // so check for the token instead of relying on status/catch

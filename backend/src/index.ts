@@ -9,7 +9,7 @@ dotenv.config();
 connectDb();
 
 const app = express();
-app.use(cors()); // add this before your routes
+app.use(cors());
 app.use(express.json());
 app.use("/api/user", userRouter);
 app.use("/api/images", imageRouter);

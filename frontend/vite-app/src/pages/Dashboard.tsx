@@ -27,7 +27,7 @@ function Dashboard() {
     try {
       const token = localStorage.getItem("token")
       const res = await axios.post(
-        "http://localhost:3000/api/images/generate",
+        `${import.meta.env.VITE_API_URL}/api/images/generate`,
         { prompt },
         { headers: { Authorization: `Bearer ${token}` } }
       )

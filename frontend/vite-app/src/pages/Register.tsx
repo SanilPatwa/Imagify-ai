@@ -20,12 +20,10 @@ function Register() {
     setLoading(true)
 
     try {
-      const res = await axios.post("http://localhost:3000/api/user/register", {
-        name,
-        email,
-        password,
-      })
-
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/user/register`,
+        { name, email, password }
+      )
       // backend returns 200 even on failure (e.g. "Credentials missing"),
       // so check for the token instead of relying on status/catch
       if (!res.data.token) {
