@@ -1,6 +1,11 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET environment variable is not defined");
+}
+const JWT_SECRET = process.env.JWT_SECRET;
+
 const userAuth = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
@@ -9,25 +14,15 @@ const userAuth = (req: Request, res: Response, next: NextFunction) => {
   }
 
   const token = authHeader.split(" ")[1];
-  if (!process.env.JWT_SECRET) {
-    throw new Error("JWT_SECRET is not defined");
-  }
   try {
-    const tokenDecoded = jwt.verify(token, process.env.JWT_SECRET) as {
-      id: string;
-    };
-    if (tokenDecoded.id) {
-      req.body.userId = tokenDecoded.id;
-    } else {
-      return res.json({
-        message: "Not authorized login again",
-      });
+    const tokenDecoded = jwt.verify(token, JWT_SECRET) as { id: string };
+    if (!tokenDecoded.id) {
+      return res.status(401).json({ message: "Not authorized, please log in again" });
     }
+    req.body.userId = tokenDecoded.id;
     next();
   } catch (error) {
-    return res.json({
-      message: "Invalid or Expired token",
-    });
+    return res.status(401).json({ message: "Invalid or expired token" });
   }
 };
 
