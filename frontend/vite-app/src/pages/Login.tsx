@@ -95,6 +95,24 @@ function Login() {
           </Button>
         </form>
 
+        {/* Divider */}
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-white/10" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background text-muted-foreground px-2">or</span>
+          </div>
+        </div>
+
+        {/* Demo access for interviewers */}
+        <Link
+          to="/demo"
+          className="flex w-full items-center justify-center rounded-md border border-dashed border-blue-500/50 py-2.5 text-sm font-medium text-blue-400 transition hover:border-blue-400 hover:bg-blue-500/10"
+        >
+          ⚡ View Live Demo — no sign-up needed
+        </Link>
+
         <p className="text-muted-foreground text-center text-sm">
           Don&apos;t have an account?{" "}
           <Link
