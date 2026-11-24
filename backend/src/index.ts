@@ -1,12 +1,11 @@
+import "./config"; // load & validate env vars FIRST, before any other imports
 import express, { Request, Response } from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import connectDb from "./db";
 import userRouter from "./routes/userRoutes";
 import imageRouter from "./routes/image.routes";
 
-dotenv.config();
 connectDb();
 
 const app = express();

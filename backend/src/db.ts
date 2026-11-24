@@ -1,12 +1,9 @@
 import mongoose from "mongoose";
+import { MONGO_URI } from "./config";
 
 const connectDb = async () => {
   try {
-    const uri = process.env.MONGO_URI;
-    if (!uri) {
-      throw new Error("Uri is not defined");
-    }
-    await mongoose.connect(uri);
+    await mongoose.connect(MONGO_URI);
     console.log("Connected to database");
   } catch (error) {
     console.error("Database connection failed", error);

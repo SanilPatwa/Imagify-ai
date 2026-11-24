@@ -1,10 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-
-if (!process.env.JWT_SECRET) {
-  throw new Error("JWT_SECRET environment variable is not defined");
-}
-const JWT_SECRET = process.env.JWT_SECRET;
+import { JWT_SECRET } from "../config";
 
 const userAuth = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
